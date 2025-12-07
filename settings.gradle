@@ -1,0 +1,31 @@
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "Tim"
+include ':app'
+include ':tuicore'
+project(':tuicore').projectDir = new File(settingsDir, '../TUIKit/TUICore/tuicore')
+// 引入 IM 组件公共模块（必要模块）
+include ':timcommon'
+project(':timcommon').projectDir = new File(settingsDir, '../TUIKit/TIMCommon/timcommon')
+// 引入聊天功能模块 (基础功能模块)
+include ':tuichat'
+project(':tuichat').projectDir = new File(settingsDir, '../TUIKit/TUIChat/tuichat')
