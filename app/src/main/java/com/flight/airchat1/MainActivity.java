@@ -19,7 +19,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.flight.airchat.HttpRequestUtil;
 import com.tencent.imsdk.v2.*;
 
 import java.io.File;
@@ -242,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 // 切换到主线程更新UI
                 runOnUiThread(() -> {
                     updateStatus("文本消息发送成功");
-                    messageInput.setText(""); // 清空消息输入框
+
                 });
             }
 
