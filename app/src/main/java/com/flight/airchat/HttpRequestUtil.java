@@ -101,18 +101,22 @@ public class HttpRequestUtil {
         headers.put("user-agent", "okhttp/4.11.0");
 
         String json = sendGet(url, headers);
-
         // 先打印完整的响应，用于调试
         Log.d("imsdk", "API响应: " + json);
 
         JSONObject jsonObject = new JSONObject(json);
-
         // 检查响应码
         int code = jsonObject.optInt("code", -1);
         String msg = jsonObject.optString("msg", "");
 
         Log.d("imsdk", "响应码: " + code + ", 消息: " + msg);
-
+        
+        // 检查Token是否被顶下线（401错误码）
+        if (code == 401 && msg.contains("Token已被顶下线")) {
+            Log.e("imsdk", "Token已被顶下线: " + token);
+            throw new Exception("Token已被顶下线");
+        }
+        
         // 安全地获取data字段
         if (!jsonObject.has("data") || jsonObject.isNull("data")) {
             Log.e("imsdk", "data字段为空或不存在");
